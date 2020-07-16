@@ -1,0 +1,27 @@
+@import '../../../../styles/settings';
+
+$list-item-height: 60px;
+
+.navbar__img {
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+.navbar__link {
+  background-color: transparent;
+  border: 0;
+  box-sizing: border-box;
+  color: lighten(#cfd0cf, 30%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  line-height: $list-item-height;
+  text-transform: capitalize;
+  width: 100%;
+
+  padding: 0 0.5rem;
+
+  &:hover {
+    background-color: darken($main-color, 10%);
+  }
+}

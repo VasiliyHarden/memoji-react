@@ -1,0 +1,24 @@
+.main {
+  flex-grow: 1;
+}
+
+.gamefield {
+	width: 595px;
+	height: 440px;
+	margin: 0 auto;
+	padding: 2rem;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: space-between;
+
+	&--medium {
+		height: 595px;
+		padding: 1rem;
+	}
+
+	&--hard {
+		width: 750px;
+	}
+}

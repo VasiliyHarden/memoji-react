@@ -1,5 +1,5 @@
 export const cardStates = {
-  correct: 'CORRECT',
-  incorrect: 'INCORRECT',
-  unknown: 'UNKNOWN'
+  correct: 'correct',
+  incorrect: 'incorrect',
+  unknown: 'unknown'
 };
