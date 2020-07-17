@@ -1,4 +1,4 @@
-export const getCardsIds = state => Object.keys(state.game.cardIds);
+export const getCardsIds = state => state.game.cardsIds;
 
 export const getGameInfo = state => ({ 
   moves: state.game.moves, 

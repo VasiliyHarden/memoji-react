@@ -12,8 +12,10 @@ const Gamefield = () => {
   const level = useSelector(getLevel);
 
   return (
-    <div className={`gamefield gamefield--${level}`}>
-      { cardsIds.map(id => <Card key={id} id={id} />) }
+    <div className='gamefield-wrapper'>
+      <div className={`gamefield gamefield--${level}`}>
+        { cardsIds.map(id => <Card key={id} id={id} />) }
+      </div>
     </div>
   );
 };

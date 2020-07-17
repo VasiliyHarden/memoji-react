@@ -6,7 +6,7 @@ import { gameLevels } from '../../constants/game-levels';
 import { cardValues } from '../../constants/card-values';
 import { getGameInfo } from '../../store/game';
 
-import './Link.scss';
+import './Navbar.scss';
 
 const Navbar = () => {
 
@@ -19,10 +19,10 @@ const Navbar = () => {
   const { moves, level, repetitions } = useSelector(getGameInfo);
 
   return (
-    <nav class='navbar'>
-      <div class='navbar__inner'>
-        <h1 class='navbar__header'>Memoji</h1>
-        <ul class='navbar__list'>
+    <nav className='navbar'>
+      <div className='navbar__inner'>
+        <h1 className='navbar__header'>Memoji</h1>
+        <ul className='navbar__list'>
           {
             links.map(link => (
               <li className='navbar__list-item' key={ link.level }>
@@ -31,16 +31,14 @@ const Navbar = () => {
             ))
           }
         </ul>
-        <p class='navbar__info'>
-          Current game level: <span class='navbar__info--highlight'>{ level }</span>
+        <p className='navbar__info'>
+          Current game level: <span className='navbar__info--highlight'>{ level }</span>
         </p>
-        <p class='navbar__info'>
-          Moves left: <span class='navbar__info--highlight'>{moves}</span>
+        <p className='navbar__info'>
+          Moves left: <span className='navbar__info--highlight'>{moves}</span>
         </p>
-        <p class='navbar__info'>
-          Pick 
-          <span class='navbar__info--highlight'>{repetitions}</span> 
-          cards of the same animal to advance
+        <p className='navbar__info'>
+          Pick <span className='navbar__info--highlight'>{repetitions}</span> cards of the same animal to advance
         </p>
       </div>
     </nav>

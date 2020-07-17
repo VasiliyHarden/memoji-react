@@ -7,7 +7,7 @@ import { faceImgSources } from '../../constants/face-img-sources';
 import './Card.scss';
 
 const Card = ({ id }) => {
-
+  
   const { isOpen, value, state } = useSelector(state => getCard(state, id), shallowEqual);
 
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Card = ({ id }) => {
         <div className={ `card__face card__face--${state}` }>
           <img src={ faceImgSources[value] } alt={ `${value}` } />
         </div>
-        <div class="card__shirt" />
+        <div className="card__shirt" />
       </div>	
     </div>
   );

@@ -1,4 +1,4 @@
-import gameLevels from './game-levels';
+import { gameLevels } from './game-levels';
 
 export const gameComplexity = {
   [gameLevels.easy]: { values: 6, repetitions: 2, moves: 60 },

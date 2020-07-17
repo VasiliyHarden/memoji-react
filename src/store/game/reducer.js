@@ -44,21 +44,21 @@ const reducerMapping = {
 
     const moves = state.moves - 1;
     let score = state.score;
-    const cardsToChange = [{
+    const cardsToChange = {
       [cardId]: { ...state.cards[cardId], isOpen: true, state: cardStates.unknown }
-    }];
-    let activeCards = [...state.activeCards, cardId];
+    };
+    let activeCardsIds = [...state.activeCardsIds, cardId];
 
-    if (activeCards.length === state.repetitions) {
-      const isEqual = checkCardsEquality(activeCards);
-      activeCards.forEach(id => {
+    if (activeCardsIds.length === state.repetitions) {
+      const isEqual = checkCardsEquality(activeCardsIds.map(id => state.cards[id]));
+      activeCardsIds.forEach(id => {
         cardsToChange[id] = {
           ...state.cards[id], 
           isOpen: isEqual,
           state: isEqual ? cardStates.correct : cardStates.incorrect
         };
       });
-      activeCards = [];
+      activeCardsIds = [];
       if (isEqual) {
         score += state.repetitions;
       }
@@ -74,7 +74,7 @@ const reducerMapping = {
 
     return {
       ...state,
-      activeCards,
+      activeCardsIds,
       cards: { ...state.cards, ...cardsToChange },
       moves,
       score,
