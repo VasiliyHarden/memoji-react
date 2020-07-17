@@ -23,6 +23,7 @@ const Link = ({ level, picValue }) => {
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a className='navbar__link' onClick={ clickHandler }>
       <img 
         src={ faceImgSources[picValue] } 

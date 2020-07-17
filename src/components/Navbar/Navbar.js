@@ -1,10 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import Link from './components/Link/Link';
+import NavbarInfo from './components/NavbarInfo/NavbarInfo';
 import { gameLevels } from '../../constants/game-levels';
 import { cardValues } from '../../constants/card-values';
-import { getGameInfo } from '../../store/game';
 
 import './Navbar.scss';
 
@@ -15,8 +14,6 @@ const Navbar = () => {
     { level: gameLevels.medium, picValue: cardValues.fox },
     { level: gameLevels.hard, picValue: cardValues.octopus }
   ];
-
-  const { moves, level, repetitions } = useSelector(getGameInfo);
 
   return (
     <nav className='navbar'>
@@ -31,15 +28,7 @@ const Navbar = () => {
             ))
           }
         </ul>
-        <p className='navbar__info'>
-          Current game level: <span className='navbar__info--highlight'>{ level }</span>
-        </p>
-        <p className='navbar__info'>
-          Moves left: <span className='navbar__info--highlight'>{moves}</span>
-        </p>
-        <p className='navbar__info'>
-          Pick <span className='navbar__info--highlight'>{repetitions}</span> cards of the same animal to advance
-        </p>
+        <NavbarInfo />
       </div>
     </nav>
   );

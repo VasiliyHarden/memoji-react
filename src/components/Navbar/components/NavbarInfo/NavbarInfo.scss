@@ -1,0 +1,18 @@
+@import '../../../../styles/settings';
+
+.navbar__info {
+  color: $alternate-text-color;
+  line-height: 1.4rem;
+  padding: 0 1rem;
+  margin: 0;
+
+  &--highlight {
+    color: $text-color;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  &:first-child {
+    margin-top: 1.5rem;
+  }
+}

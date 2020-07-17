@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { getCard, openCard } from '../../store/game';
 import { faceImgSources } from '../../constants/face-img-sources';
@@ -7,8 +7,8 @@ import { faceImgSources } from '../../constants/face-img-sources';
 import './Card.scss';
 
 const Card = ({ id }) => {
-  
-  const { isOpen, value, state } = useSelector(state => getCard(state, id), shallowEqual);
+
+  const { isOpen, value, state } = useSelector(state => getCard(state, id));
 
   const dispatch = useDispatch();
   const clickHandler = () => {
@@ -29,4 +29,4 @@ const Card = ({ id }) => {
   );
 }
 
-export default Card;
+export default React.memo(Card);

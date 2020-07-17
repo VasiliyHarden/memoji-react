@@ -1,11 +1,13 @@
 import {v4 as uuid} from 'uuid';
+
 import { actionTypes } from "./action-types";
 import { gameComplexity } from "../../constants/game-complexity";
-import { generateValues } from "./utils/generate-values";
 import { cardValues } from "../../constants/card-values";
 import { cardStates } from "../../constants/card-states";
+import { generateValues } from "./utils/generate-values";
 import { checkCardsEquality } from './utils/check-cards-equality';
-import { gameOutcomes } from '../../constants/game-outcomes';
+import { findIncorrectAndClose } from './utils/find-incorrect-and-close';
+import { checkGameOutcome } from './utils/check-game-outcome';
 
 const initialState = {
   cards: {},
@@ -13,9 +15,8 @@ const initialState = {
   activeCardsIds: [],
   moves: null,
   repetitions: null,
-  values: null,
   level: null,
-  score: 0,
+  pointsToWin: null,
   gameOutcome: null
 };
 
@@ -30,9 +31,9 @@ const reducerMapping = {
       ...initialState,
       cards: Object.fromEntries(cards),
       cardsIds: cards.map(card => card[0]),
+      pointsToWin: values * repetitions,
       moves,
       repetitions,
-      values,
       level
     };
   },
@@ -42,42 +43,39 @@ const reducerMapping = {
       return state;
     }
 
-    const moves = state.moves - 1;
-    let score = state.score;
-    const cardsToChange = {
-      [cardId]: { ...state.cards[cardId], isOpen: true, state: cardStates.unknown }
+    const cardsToChange = findIncorrectAndClose(state.cards);
+    cardsToChange[cardId] = { 
+      ...state.cards[cardId], isOpen: true
     };
     let activeCardsIds = [...state.activeCardsIds, cardId];
+
+    const moves = state.moves - 1;
+    let pointsToWin = state.pointsToWin;
 
     if (activeCardsIds.length === state.repetitions) {
       const isEqual = checkCardsEquality(activeCardsIds.map(id => state.cards[id]));
       activeCardsIds.forEach(id => {
         cardsToChange[id] = {
-          ...state.cards[id], 
-          isOpen: isEqual,
+          ...state.cards[id],
+          isOpen: true,
           state: isEqual ? cardStates.correct : cardStates.incorrect
         };
       });
       activeCardsIds = [];
+
       if (isEqual) {
-        score += state.repetitions;
+        pointsToWin -= state.repetitions;
       }
     }
 
-    let gameOutcome = null;
-    if (moves === 0) {
-      gameOutcome = gameOutcomes.lose;
-    }
-    if (score === state.values * state.repetitions) {
-      gameOutcome = gameOutcomes.win;
-    }
+    const gameOutcome = checkGameOutcome(moves, pointsToWin);
 
     return {
       ...state,
       activeCardsIds,
       cards: { ...state.cards, ...cardsToChange },
       moves,
-      score,
+      pointsToWin,
       gameOutcome
     };
   }
