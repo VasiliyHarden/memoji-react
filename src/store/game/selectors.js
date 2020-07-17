@@ -6,6 +6,8 @@ export const getGameInfo = state => ({
   repetitions: state.game.repetitions 
 });
 
+export const getGameOutcome = state => state.game.gameOutcome;
+
 export const getLevel = state => state.game.level;
 
 export const getCard = (state, id) => state.game.cards[id];

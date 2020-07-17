@@ -23,9 +23,9 @@ const reducerMapping = {
   [actionTypes.GAME_INIT]: (state, { level }) => {
     const { values, repetitions, moves } = gameComplexity[level];
     const gameValues = generateValues(values, repetitions, cardValues);
-    const cards = gameValues.map(value => ([uuid(), { 
+    const cards = gameValues.map(value => [uuid(), { 
       value, isOpen: false, state: cardStates.unknown 
-    }]));
+    }]);
     return {
       ...initialState,
       cards: Object.fromEntries(cards),
